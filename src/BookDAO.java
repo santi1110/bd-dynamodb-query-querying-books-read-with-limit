@@ -1,5 +1,3 @@
-package com.amazon.ata.dynamodbquery.prework.querywithlimit;
-
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 
 import java.util.List;

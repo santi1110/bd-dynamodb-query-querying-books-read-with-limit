@@ -1,5 +1,3 @@
-package com.amazon.ata.dynamodbquery.prework.querywithlimit;
-
 import java.util.ArrayList;
 import java.util.List;
 

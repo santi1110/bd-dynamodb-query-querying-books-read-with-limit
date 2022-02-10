@@ -1,7 +1,5 @@
 ### Query Books with limit and last evaluated key
 
-**Branch name:** dynamodbquery-prework
-
 Expected time required: 15 min
 
 Building off the `BooksRead` table in the previous question, you want to be able to narrow the scope of your query and see
@@ -24,9 +22,6 @@ are used for testing in the `BookApp` class.
 
 The unit tests in `BookDAOTest` are set-up with a mock database so that you can test your methods offline. The `main()`
 method is set-up in `BookApp` so that you can connect to the real BooksRead table and test your methods that way.
-
-When you've finished writing your code and testing, make sure rde workflow `dynamodbquery-prework-querywithlimit` 
-is passing and push.
 
 HINTS:
 * [I can't seem to get the next items that match the query, help!](./hints/hint-01.md)
