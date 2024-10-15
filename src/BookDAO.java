@@ -1,6 +1,11 @@
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.QueryResultPage;
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BookDAO {
 
@@ -26,7 +31,27 @@ public class BookDAO {
      */
     public List<Book> getBooksReadByEmployee(String employeeId, String exclusiveStartAsin, int limit) {
         //TODO: implement
-        return null;
+        Book bookKey = new Book();
+        bookKey.setId(employeeId);
+
+        // Create the query expression
+        DynamoDBQueryExpression<Book> queryExpression = new DynamoDBQueryExpression<Book>()
+                .withHashKeyValues(bookKey)
+                .withLimit(limit);
+
+        // Set the exclusive start key if provided
+        if (exclusiveStartAsin != null) {
+            Map<String, AttributeValue> exclusiveStartKey = new HashMap<>();
+            exclusiveStartKey.put("id", new AttributeValue().withS(employeeId));
+            exclusiveStartKey.put("asin", new AttributeValue().withS(exclusiveStartAsin));
+            queryExpression.setExclusiveStartKey(exclusiveStartKey);
+        }
+
+        // Execute the queryPage() method
+        QueryResultPage<Book> resultPage = mapper.queryPage(Book.class, queryExpression);
+
+        // Return the list of books
+        return resultPage.getResults();
     }
 
 }
